@@ -1,0 +1,32 @@
+.IconButton {
+    display: flex;
+    align-items: center;
+    color: var(--text);
+    transition: all .3s ease;
+    cursor: pointer;
+
+    span {
+        transition: all .3s ease;
+    }
+
+    &:hover {
+        span {
+            color: var(--orange);
+        }
+    }
+    &__after {
+        margin-left: 5px;
+        font-size: 20px;
+        line-height: 20px;
+    }
+
+    &__before {
+        margin-right: 5px;
+        font-size: 20px;
+        line-height: 20px;
+    }
+
+    &__text {
+        letter-spacing: 0.05em;
+    }
+}

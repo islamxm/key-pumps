@@ -1,0 +1,57 @@
+.Navigation {
+
+    &__list {
+        display: flex;
+        align-items: center;
+        margin-bottom: 0;
+    }
+
+    &__item {
+        margin: 0 20px;
+
+        &:first-child {
+            margin-left: 0;
+        }
+
+        &:last-child {
+            margin-right: 0;
+        }
+
+        a {
+            color: var(--text);
+            transition: all .3s ease;
+            white-space: nowrap;
+
+            &:hover {
+                color: var(--orange);
+            }
+        }
+
+        &_link-dr {
+            position: relative;
+
+            padding-right: 20px;
+
+            &:after {
+                position: absolute;
+                transition: all .3s ease;
+                width: 15px;
+                height: 15px;
+                right: 0;
+                top: calc(50% - (15px / 2));
+                background-image: url('../../assets/svg/nav-arrow.svg');
+                background-repeat: no-repeat;
+                background-position: center;
+                background-size: contain;
+                content: '';
+            }
+        }
+
+        &_link-dr.ant-dropdown-open {
+
+            &:after {
+                transform: rotate(180deg);
+            }
+        }
+    }
+}

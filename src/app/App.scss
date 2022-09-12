@@ -1,0 +1,16 @@
+.App {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    
+    .Header {
+        flex: 0 0 auto;
+    }
+    .body-part {
+        flex: 1 0 auto;
+    }
+
+    .Footer {
+        flex: 0 0 auto;
+    }
+}

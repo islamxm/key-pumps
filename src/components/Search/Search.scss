@@ -1,0 +1,30 @@
+.Search {
+    border-radius: 9px;
+    background: rgba(0, 0, 0, 0.08);
+    overflow: hidden;
+    width: 100%;
+    &__input {
+        display: flex;
+        position: relative;
+
+        &_el {
+            display: block;
+            width: 100%;
+            padding: 10px 40px 10px 15px;
+            border: none;
+            background-color: transparent;
+
+            &:focus {
+                outline: none;
+            }
+        }
+
+        &_icon {
+            position: absolute; 
+            font-size: 20px;
+            top: calc(50% - 10px);
+            right: 15px;
+            color: var(--green);
+        }
+    }
+}
