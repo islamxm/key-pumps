@@ -36,6 +36,11 @@
             margin-bottom: 30px;
             color: var(--text);
             transition: all .3s ease;
+            text-transform: uppercase;
+
+            &:hover {
+                color: var(--orange);
+            }
 
             
         }

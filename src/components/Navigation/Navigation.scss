@@ -1,5 +1,27 @@
 .Navigation {
 
+    &__menu {
+        // border-radius: 10px;
+        background-color: #fff;
+        box-shadow: 0 0 10px 5px rgba(#000, .2);
+        overflow: hidden;
+
+        &_item {
+            
+            a {
+                padding: 10px;
+                transition: all .3s ease;
+                display: block;
+                font-size: 16px;
+                color: var(--text);
+                &:hover {
+                    background-color: var(--orange);
+                    color: #fff;
+                }
+            }
+        }
+    }
+
     &__list {
         display: flex;
         align-items: center;

@@ -17,8 +17,20 @@
     &__body {
 
         &_slider {
-
             padding-bottom: 40px !important;
+
+            .swiper-wrapper {
+                align-items: unset !important;
+            }
+            
+            &_sl {
+                
+                // height: unset !important;
+
+                .Product {
+                    height: 100%;
+                }
+            }
 
             &_scrollbar {
                 position: absolute;

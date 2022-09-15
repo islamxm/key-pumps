@@ -1,8 +1,12 @@
 import './HomeCat.scss';
 import CatCard from '../CatCard/CatCard';
 import Button from '../Button/Button';
+import { useEffect } from 'react';
 
-const HomeCat = () => {
+const HomeCat = ({list}) => {
+    useEffect(() => {
+        console.log(list)
+    }, [list])
     return (
         <div className="HomeCat">
             <div className="container">
@@ -11,15 +15,21 @@ const HomeCat = () => {
                         Категории
                     </h2>
                     <div className="HomeCat__body">
-                        <div className="HomeCat__body_item">
-                            <CatCard/>
-                        </div>
-                        <div className="HomeCat__body_item">
-                            <CatCard/>
-                        </div>
-                        <div className="HomeCat__body_item">
-                            <CatCard/>
-                        </div>
+                        {
+                            list && list.length > 0 ? (
+                                list.map(item => (
+                                    <div className="HomeCat__body_item" key={item.id}>
+                                        <CatCard 
+                                            id={item.id} 
+                                            title={item.title} 
+                                            images={item.categoryImage?.photosLinks}
+                                            link={item.title}/>
+                                    </div>
+                                ))
+                            ) : null
+                        }
+                        
+                        
                     </div>
                     <div className="HomeCat__action">
                         <Button variant={'warning'} text={'Все категории'}/>

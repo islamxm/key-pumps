@@ -40,7 +40,7 @@
     }
 
     &__body {
-        height: 35%;
+        // height: 35%;
         padding: 15px 25px;
         width: 100%;
         position: relative;
@@ -50,6 +50,7 @@
             font-weight: 500;
             font-size: 19px;
             line-height: 31px;
+            text-transform: uppercase;
         }
 
         &_action {

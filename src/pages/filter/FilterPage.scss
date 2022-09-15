@@ -1,0 +1,23 @@
+.FilterPage {
+
+
+    &__in {
+        
+    }
+
+    &__head {
+        margin-bottom: 15px;
+
+        span {
+            font-size: 20px;
+            line-height: 24px;
+            color: #CDCDCD;
+        }
+    }
+
+    &__body {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+    }
+}
