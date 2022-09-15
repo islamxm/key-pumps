@@ -62,7 +62,7 @@ const FilterList = ({list, chips, removeFilter, loading}) => {
                     ) : (
                         list?.length > 0 ? (
                             list.map((item, index) => (
-                                <div className="FilterList__body_item" key={item.product?._id}>
+                                <div className="FilterList__body_item" key={index}>
                                     <Product 
                                         price={item.product?.price}
                                         title={item.product?.title}

@@ -27,12 +27,15 @@ const FilterPage = () => {
     // получить данные по категории
     useEffect(() => {
         setLoading(true);
-        ds.getProducts().then(res => setRecentList(res.posts?.slice(0, 10)))
-        ds.getDetailCategory(categoryTitle).then(res => {
-            console.log(res.post)
-            setFiltersList(res.post?.filters);
-            setCatProds(res.post?.categoryProducts);
-        }).finally(_ => setLoading(false))
+        if(categoryTitle) {
+            ds.getProducts().then(res => setRecentList(res.posts?.slice(0, 10)))
+            ds.getDetailCategory(categoryTitle).then(res => {
+                console.log(res.post)
+                setFiltersList(res.post?.filters);
+                setCatProds(res.post?.categoryProducts);
+            }).finally(_ => setLoading(false))
+        }
+        
 
     }, [categoryTitle])
     
@@ -40,18 +43,20 @@ const FilterPage = () => {
     // фильтровать
     useEffect(() => {
         setLoading(true)
-        ds.getProductFilter(categoryTitle, selectedFilters).then(res => {
-            // setCatProds(res?.posts)
-            if(selectedFilters.length > 0) {
-                setCatProds(res?.posts)
-            } else {
-                ds.getDetailCategory(categoryTitle).then(res => {
-                    setCatProds(res.post?.categoryProducts);
-                }).finally(_ => setLoading(false))
-            }
-            console.log(res);
-        }).finally(_ => setLoading(false))
-    }, [selectedFilters, categoryTitle])
+        console.log(selectedFilters)
+        if(selectedFilters.length > 0) {
+            ds.getProductFilter(categoryTitle, selectedFilters).then(res => {
+                console.log(res)
+                setCatProds(res)
+            }).finally(_ => setLoading(false))
+        } else {
+            ds.getDetailCategory(categoryTitle).then(res => {
+                console.log(res)
+                setCatProds(res?.post?.categoryProducts)
+            }).finally(_ => setLoading(false))
+        }
+        
+    }, [selectedFilters])
 
 
     //сброс фильтров при изменении категории
