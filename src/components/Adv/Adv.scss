@@ -106,3 +106,47 @@
         }
     }
 }
+
+@media (max-width: 768px) {
+    .Adv {
+
+        &__in {
+            padding: 25px 0;
+        }
+
+        &__title {
+            margin-bottom: 25px;
+        }
+
+        &__list {
+            flex-wrap: wrap;
+
+            &_item {
+                width: 100%;
+                margin-bottom: 20px;
+                border-left: none;
+                border-right: none;
+            }
+        }
+
+        &__body {
+            flex-wrap: wrap;
+            margin-top: 20px;
+
+            &_img {
+                order: 1;
+                width: 100%;
+            }
+
+            &_descr {
+                width: 100%;
+                order: 2;
+
+                &_text {
+                    font-weight: 400;
+                    line-height: 120%;
+                }
+            }
+        }
+    }
+}

@@ -6,6 +6,10 @@ import {ShoppingCartOutlined } from '@ant-design/icons';
 import IconButton from '../IconButton/IconButton';
 import Counter from '../Counter/Counter';
 import {Swiper, SwiperSlide} from 'swiper/react';
+import { useDispatch, useSelector } from 'react-redux';
+import { NumericFormat } from 'react-number-format';
+import { addItemToBasket, removeItemFromBasket } from '../../store/actions';
+import pop from '../../assets/pop.jpeg';
 
 const Product = ({
     category,
@@ -19,14 +23,57 @@ const Product = ({
     price,
     linkedProducts,
     productImages,
-    title}) => {
+    title,
+    popular,
+    discount,
+    top,
+    articul}) => {
 
+    const dispatch = useDispatch();
+    const basketList = useSelector(state => state);
 
+    const [dsc, setDsc] = useState(0);
     const [count, setCount] = useState(0);
 
+    useEffect(() => {
+        setCount(basketList?.find(item => item.name == title)?.count ? basketList?.find(item => item.name == title)?.count : 0)
+        
+    }, [basketList])
+
+    
+
+
+    useEffect(() => {
+        if(discount !== null) {
+            let tt = (price - discount) / price * 100;
+            setDsc(tt)
+        }
+        
+    }, [discount])
+
+    
+
+
     const decHandle = () => {
+        if(count == 0) {
+            dispatch(removeItemFromBasket({
+                image: productImages?.photosLinks[0],
+                name: title,
+                count: count,
+                price: discount ? discount : price,
+                articul: articul
+            }))
+        }
         if(count > 0) {
-            setCount(count => count - 1);
+            
+            dispatch(addItemToBasket({
+                image: productImages?.photosLinks[0],
+                name: title,
+                count: count - 1,
+                price: discount ? discount : price,
+                articul: articul
+            }))
+            
         } else {
             return;
         }
@@ -34,43 +81,61 @@ const Product = ({
 
     const incHandle = () => {
         if(count < 20) {
-            setCount(count => count + 1);
+            
+            dispatch(addItemToBasket({
+                image: productImages?.photosLinks[0],
+                name: title,
+                count: count + 1,
+                price: discount ? discount : price,
+                articul: articul
+
+    
+            }))
         } else {
             return;
         }
     }
+
+    
 
 
 
 
     return (
         <div className="Product">
-            <div className="Product__badge">АКЦИЯ</div>
-            <div className="Product__dsc">-9%</div>
+            {
+                top ? (
+                    <div className="Product__badge">ТОП ПРОДАЖ</div>
+                ) : null
+            }
+            
+            {
+                dsc ? (
+                    <div className="Product__dsc">-{dsc}%</div>
+                ) : null
+            }
+            
 
-            <Link to={'/'} className="Product__img">
-                <Swiper
-                    spaceBetween={10}>
-                    {
-                        productImages?.photosLinks?.length > 0 ? (
-                            productImages.photosLinks.map((item, index) => (
-                                <SwiperSlide key={index}>
-                                    <img src={item} alt="" />
-                                </SwiperSlide>
-                            ))
-                        ) : (
-                            <SwiperSlide>
-                                <img src={placeholder} alt="" />
-                            </SwiperSlide>
-                        )
-                    }
-                </Swiper>
-                {/* <img src={productImages?.photosLinks && productImages?.photosLinks.length > 0 ? productImages.photosLinks[0] : placeholder} alt="" /> */}
+            <Link to={`/catalog/${category}/${title}`} className="Product__img">
+                {
+                    productImages?.photosLinks?.length > 0 ? (
+                        <img src={productImages?.photosLinks[0]} alt="" />
+                    ) : (
+                        <img src={placeholder} alt="" />
+                    )
+                }
             </Link>
             <div className="Product__body">
-                <Link to={'/'} className="Product__body_name">{title}</Link>
+                <Link to={`/catalog/${category}/${title}`} className="Product__body_name">{title}</Link>
                 <div className="Product__body_action">
-                    <div className="Product__body_action_price">{price}₽</div>
+                    <div className="Product__body_action_price"><NumericFormat readOnly thousandSeparator={' '} thousandsGroupStyle={'thousand'} value={discount ? discount : price} suffix={'₽'}/>
+                    
+                        {
+                            discount ? (
+                                <span><NumericFormat readOnly radioGroup='' thousandSeparator={' '} thousandsGroupStyle={'thousand'} value={discount ? price : null} suffix={'₽'}/></span>
+                            ) : null
+                        }
+                        </div>
                     <div className="Product__body_action_bsk">
                         {
                             count === 0 ? (

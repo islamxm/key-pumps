@@ -2,7 +2,7 @@
 
 
     &__in {
-        
+        padding: 40px 0;
     }
 
     &__head {
@@ -19,5 +19,25 @@
         display: flex;
         justify-content: space-between;
         align-items: flex-start;
+    }
+}
+
+@media (max-width: 768px) {
+    .FilterPage {
+
+        &__head {
+            font-weight: 400 !important;
+            font-size: 25px !important;
+            line-height: 35px !important;
+
+            span {
+                font-weight: 400 !important;
+            font-size: 16px !important;
+            line-height: 26px !important;
+            }
+        }
+        &__body {
+            flex-wrap: wrap;
+        }
     }
 }

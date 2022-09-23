@@ -29,3 +29,26 @@
         justify-content: center;
     }
 }
+
+@media (max-width: 768px) {
+
+    .HomeCat {
+
+        &__in {
+            padding: 25px 0;
+        }
+
+        &__title {
+            margin-bottom: 20px;
+        }
+
+        &__body {
+            
+            &_item {
+                width: 100%;
+
+                
+            }
+        }
+    }
+}

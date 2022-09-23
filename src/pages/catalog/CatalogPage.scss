@@ -20,3 +20,16 @@
         }
     }
 }
+
+@media (max-width: 620px) {
+
+    .CatalogPage {
+
+        &__body {
+
+            &_item {
+                width: calc(100% - 16px);
+            }
+        }
+    }
+}

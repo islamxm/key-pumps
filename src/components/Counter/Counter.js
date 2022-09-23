@@ -28,9 +28,9 @@ const Counter = ({value, dec, inc, min, max}) => {
 
     return (
         <div className="Counter">
-            <button onClick={dec} className="Counter__btn Counter__btn-deс"><MinusOutlined /></button>
+            <button type='button' onClick={dec} className="Counter__btn Counter__btn-deс"><MinusOutlined /></button>
             <input value={value} readOnly type="number" className='Counter__input'/>
-            <button onClick={inc} className="Counter__btn Counter__btn-inc"><PlusOutlined /></button>
+            <button type='button' onClick={inc} className="Counter__btn Counter__btn-inc"><PlusOutlined /></button>
         </div>
     )
 }

@@ -9,7 +9,7 @@ import placeholder from '../../assets/prod-pl.png';
 const Article = ({body, date, title, id, images}) => {
 
     return (
-        <Link to={'/'} className="Article">
+        <Link to={`/articles/${title}`} className="Article">
             <div className="Article__img">
                 <img src={images?.length > 0 ? images[0] : placeholder} alt="" />
             </div>

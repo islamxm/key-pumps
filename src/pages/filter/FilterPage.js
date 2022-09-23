@@ -8,15 +8,16 @@ import { useEffect, useState } from "react";
 import Fb from '../../components/Fb/Fb'; 
 import { useParams } from "react-router-dom";
 import useContent from "../../hooks/useContent";
+import {motion} from 'framer-motion';
 
 const ds = new dataService();
 
-const testCat = "категория 2";
-const testFilters = ["Тест", "Sila"];
+
+
 
 
 const FilterPage = () => {
-    const {loading, view, setLoading, setView} = useContent();
+    const {loading, setLoading} = useContent();
     const [recentList, setRecentList] = useState([]);
     const {categoryTitle} = useParams();
 
@@ -24,48 +25,128 @@ const FilterPage = () => {
     const [filtersList, setFiltersList] = useState([]);
     const [selectedFilters, setSelectedFilters] = useState([]);
 
-    // получить данные по категории
-    useEffect(() => {
-        setLoading(true);
-        if(categoryTitle) {
-            ds.getProducts().then(res => setRecentList(res.posts?.slice(0, 10)))
-            ds.getDetailCategory(categoryTitle).then(res => {
-                console.log(res.post)
-                setFiltersList(res.post?.filters);
-                setCatProds(res.post?.categoryProducts);
-            }).finally(_ => setLoading(false))
-        }
-        
+    const [startPrice, setStartPrice] = useState(0);
+    const [endPrice, setEndPrice] = useState(2000000);
+    const [count, setCount] = useState(12);
+    const [offset, setOffset] = useState(0);
 
-    }, [categoryTitle])
+    const [sorting, setSorting] = useState(1)
+    const [totalLength, setTotalLength] = useState(0);
+
+    const [btnDis, setBtnDis] = useState(false);
+    const [fns, setFns] = useState(false)
     
 
-    // фильтровать
     useEffect(() => {
-        setLoading(true)
-        console.log(selectedFilters)
-        if(selectedFilters.length > 0) {
-            ds.getProductFilter(categoryTitle, selectedFilters).then(res => {
-                console.log(res)
-                setCatProds(res)
-            }).finally(_ => setLoading(false))
-        } else {
+        document.body.classList.add('touch-disabled')
+        if(categoryTitle) {
+            ds.getPopularProds().then(res => setRecentList(res))
             ds.getDetailCategory(categoryTitle).then(res => {
-                console.log(res)
-                setCatProds(res?.post?.categoryProducts)
-            }).finally(_ => setLoading(false))
+                setSelectedFilters([])
+                setFiltersList(res?.post?.filters);
+            })
         }
-        
+    }, [categoryTitle])
+
+    useEffect(() => {
+        console.log(selectedFilters)
     }, [selectedFilters])
 
 
-    //сброс фильтров при изменении категории
+
     useEffect(() => {
-        setSelectedFilters([]);
-    }, [categoryTitle])
+        setOffset(0)
+    }, [sorting])
+
+    // фильтровать
+    useEffect(() => {
+        
+        
+
+        if(selectedFilters.length > 0 || (startPrice >= 0 && endPrice >= 0)) {
+            
+
+            if(offset == 0) {
+                document.body.classList.add('touch-disabled')
+                setLoading(true)  
+                ds.getProductFilter(
+                    categoryTitle, 
+                    selectedFilters, 
+                    startPrice, 
+                    endPrice, 
+                    count,
+                    offset,
+                    sorting).then(res => {
+                        console.log(res);
+                    setTotalLength(res.length);
+                    setCatProds(res)
+
+                    
+
+                    
+                    
+                    if(res.length <= 0) {
+                        setFns(true)
+                    } else {
+                        setFns(false)
+                    }
+
+                    
+                }).finally(_ => {
+                    setLoading(false)
+                    document.body.classList.remove('touch-disabled')
+                })
+            }
+            if(offset > 0) {
+                setBtnDis(true)
+                ds.getProductFilter(
+                    categoryTitle, 
+                    selectedFilters, 
+                    startPrice, 
+                    endPrice, 
+                    count,
+                    offset,
+                    sorting).then(res => {
+                        console.log(res)
+    
+                    setTotalLength(res.length);
+                    setCatProds(state => {
+                        return [
+                            ...state,
+                            ...res
+                        ]
+                    })
+                    
+                    if(res.length <= 0) {
+                        setFns(true)
+                    } else {
+                        setFns(false)
+                    }
+                    
+                    
+                }).finally(_ => {
+                    setBtnDis(false)
+                })
+            }
+            
+        } else {
+            
+        }
+        
+    }, [selectedFilters, startPrice, endPrice, sorting, categoryTitle, count, offset])
 
 
-    // удалить фильтр из плашек
+
+
+
+
+
+
+
+    const priceFilter = (start, end) => {
+        setStartPrice(start)
+        setEndPrice(end)
+    }
     const handleRemoveChip = (chip) => {
         setSelectedFilters(state => {
             return state.filter(item => item != chip);
@@ -73,9 +154,13 @@ const FilterPage = () => {
     }
 
 
+
     return (
-        <div className="FilterPage body-part">
-            <Breadcrumbs/>
+        <motion.div 
+            initial={{opacity: 0}}
+            animate={{opacity: 1}}
+            className="FilterPage body-part">
+            {/* <Breadcrumbs/> */}
             <div className="container">
                 <div className="FilterPage__in">
                     <div className="FilterPage__head section-title">{categoryTitle} <span>({catProds?.length > 0 ? catProds.length : 0})</span></div>
@@ -84,25 +169,31 @@ const FilterPage = () => {
                         <Filter 
                             selected={selectedFilters} 
                             selectFilters={setSelectedFilters} 
-                            filters={filtersList}/>
+                            filters={filtersList}
+                            priceFilter={priceFilter}/>
 
                         
-                        <FilterList 
+                        <FilterList
+                            totalLength={totalLength} 
                             loading={loading}
                             removeFilter={handleRemoveChip} 
                             chips={selectedFilters} 
-                            list={catProds}/>
+                            list={catProds}
+                            setSorting={setSorting}
+                            setOffset={setOffset}
+                            btnDis={btnDis}
+                            fns={fns}/>
 
                     </div>
                     <Ribbon 
                         list={recentList} 
-                        title={'Вы недавно просмотрели'} 
+                        title={'Популярные продукты'} 
                         type={'products'} 
                         spv={4}/>
                 </div>
             </div>
             <Fb/>
-        </div>
+        </motion.div>
     )
 }
 

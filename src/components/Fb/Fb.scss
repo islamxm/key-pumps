@@ -55,6 +55,7 @@
 
         &_item {
             width: calc(100% / 3.1);
+            height: 100%;
         }
 
         &_item-inp {
@@ -76,6 +77,34 @@
         &_item-btn {
             button {
                 width: 100%;
+                
+            }
+        }
+    }
+}
+
+@media (max-width: 768px) {
+    .Fb {
+
+        &__cb {
+            display: none;
+        }
+
+        &__text {
+            margin-bottom: 20px;
+            font-size: 14px;
+        }
+        &__rw {
+            flex-wrap: wrap;
+
+            &_item {
+                width: 100%;
+                margin-bottom: 10px;
+
+                input {
+                    padding: 13px 16px;
+                    font-size: 14px;
+                }
             }
         }
     }

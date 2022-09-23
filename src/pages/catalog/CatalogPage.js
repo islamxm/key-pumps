@@ -3,6 +3,8 @@ import CatCard from "../../components/CatCard/CatCard";
 import Breadcrumbs from "../../components/Breadcrumbs/Breadcrumbs";
 import dataService from "../../services/dataService";
 import { useEffect, useState } from "react";
+import {motion} from 'framer-motion';
+import DefaultLoader from '../../components/Loaders/DefaultLoader/DefaultLoader';
 const ds = new dataService();
 
 
@@ -11,15 +13,19 @@ const CatalogPage = () => {
 
     useEffect(() => {
         ds.getCategories().then(res => {
-            setCatalog(res.posts)
+            setCatalog(res.posts.sort((a, b) => a.order > b.order ? 1 : -1))
         })
+        
     },[])
 
 
 
     return (
-        <div className="CatalogPage body-part">
-            <Breadcrumbs/>
+        <motion.div
+             initial={{opacity: 0}}
+             animate={{opacity: 1}}
+            className="CatalogPage body-part">
+            {/* <Breadcrumbs/> */}
             <div className="container">
                 <div className="CatalogPage__in">
                     <h2 className="CatalogPage__head section-title">
@@ -37,12 +43,12 @@ const CatalogPage = () => {
                                             />
                                     </div>
                                 ))
-                            ) : null
+                            ) : <DefaultLoader/>
                         }
                     </div>
                 </div>
             </div>
-        </div>
+        </motion.div>
     )
 }
 

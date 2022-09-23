@@ -1,8 +1,15 @@
-import './Button.scss';
+import './Button.scss';import { LoadingOutlined } from '@ant-design/icons';
 
-const Button = ({text, active, variant, style, onClick}) => {
+const Button = ({text, disabled, variant, style, onClick, type, load}) => {
     return (
-        <button onClick={onClick} className={"Button " + variant} style={style}>
+        <button type={type ? type : 'button'} disabled={disabled} onClick={onClick} className={"Button " + variant + ` ${load ? ' load ' : ''}`} style={style}>
+            {
+                load ? (
+                    <div className="Button__load">
+                        <LoadingOutlined spin/>
+                    </div>
+                ) : null
+            }
             <span className="Button__text">
                 {text}
             </span>

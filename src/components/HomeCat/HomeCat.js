@@ -2,11 +2,12 @@ import './HomeCat.scss';
 import CatCard from '../CatCard/CatCard';
 import Button from '../Button/Button';
 import { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const HomeCat = ({list}) => {
-    useEffect(() => {
-        console.log(list)
-    }, [list])
+    const nav = useNavigate();
+    
+
     return (
         <div className="HomeCat">
             <div className="container">
@@ -32,7 +33,7 @@ const HomeCat = ({list}) => {
                         
                     </div>
                     <div className="HomeCat__action">
-                        <Button variant={'warning'} text={'Все категории'}/>
+                        <Button onClick={() => nav('/catalog')} variant={'warning'} text={'Все категории'}/>
                     </div>
                 </div>
             </div>

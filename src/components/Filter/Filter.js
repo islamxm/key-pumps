@@ -6,11 +6,11 @@ import { NumericFormat } from 'react-number-format';
 import { Checkbox } from 'antd';
 const { Panel } = Collapse;
 
-const Filter = ({filters, selectFilters, selected}) => {
+const Filter = ({filters, selectFilters, selected, priceFilter}) => {
     const [priceStart, setPriceStart] = useState(0);
     const [priceEnd, setPriceEnd] = useState(2000000);
 
-
+  
 
     const handlePriceChangeSlider = (v) => {
         setPriceStart(v[0]);
@@ -23,6 +23,11 @@ const Filter = ({filters, selectFilters, selected}) => {
 
     const handleEndPriceChange = (v) => {
         setPriceEnd(v.floatValue)
+    }
+
+    const afterChange = (v) => {
+        
+        priceFilter(v[0], v[1])
     }
 
 
@@ -47,6 +52,8 @@ const Filter = ({filters, selectFilters, selected}) => {
     const resetFilter = () => {
         selectFilters([])
     }
+
+    
     
 
 
@@ -75,7 +82,8 @@ const Filter = ({filters, selectFilters, selected}) => {
                                                     const { value } = values;
                                                     return value <= 2000000 && value >= 0;
                                                   }}
-                                                onValueChange={handleStartPriceChange}
+                                                
+                                                onChange={handleStartPriceChange}
                                                 />
                                         </div>
                                         <div className="Filter__body_part_prc_vals_item">
@@ -89,12 +97,13 @@ const Filter = ({filters, selectFilters, selected}) => {
                                                     const { value } = values;
                                                     return value <= 2000000 && value >= 0;
                                                   }}
-                                                onValueChange={handleEndPriceChange}
+                                                onChange={handleEndPriceChange}
                                                 />
                                         </div>
                                     </div>
                                     <div className="Filter__body_part_prc_slider">
                                         <Slider 
+                                            onAfterChange={afterChange}
                                             min={0} 
                                             max={2000000} 
                                             range 
@@ -102,7 +111,10 @@ const Filter = ({filters, selectFilters, selected}) => {
                                             tooltip={{
                                                 open: false
                                             }}
+                                            onMouseUp
                                             onChange={handlePriceChangeSlider}
+                                            
+                                            
                                             />
                                     </div>
                                 </div>
@@ -131,7 +143,7 @@ const Filter = ({filters, selectFilters, selected}) => {
                                                                         }
                                                                     })
                                                                 } onChange={filterHandle} name={item}>{item}</Checkbox>
-                                                                <span className="Filter__body_part_chs_item_vl">(10)</span>
+                                                                {/* <span className="Filter__body_part_chs_item_vl">(10)</span> */}
                                                             </div>
                                                         ))
                                                     ) : null

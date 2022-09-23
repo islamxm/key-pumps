@@ -3,7 +3,7 @@ import './IconButton.scss';
 
 const IconButton = ({beforeIcon, afterIcon, text, onlyIcon, variant, onClick}) => {
     return (
-        <button onClick={onClick} className={"IconButton " + variant}>
+        <button onClick={onClick} className={"IconButton " + (variant ? variant : '')}>
             {
                 beforeIcon ? (
                     <span className={"IconButton__before " + (onlyIcon ? 'only-icon' : '')}>

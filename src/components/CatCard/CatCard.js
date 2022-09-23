@@ -5,9 +5,7 @@ import { Link } from 'react-router-dom';
 import { useEffect } from 'react';
 
 const CatCard = ({id, title, images, link}) => {
-    useEffect(() => {
-        console.log(images)
-    }, [images])
+    
     return (
         <div className="CatCard">
             {
@@ -21,7 +19,7 @@ const CatCard = ({id, title, images, link}) => {
             <div className="CatCard__body">
                 <h3 className="CatCard__body_name">{title}</h3>
                 <div className="CatCard__body_action">
-                    <Link to={`/filter/${link}`} className={'CatCard__body_action_item'}>
+                    <Link to={`/catalog/${link}`} className={'CatCard__body_action_item'}>
                         <Button text={'Перейти'} variant={'warning-tr'}/>
                     </Link>
                     

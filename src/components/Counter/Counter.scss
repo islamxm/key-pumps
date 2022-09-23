@@ -33,3 +33,19 @@
         -moz-appearance: textfield;
     }
 }
+
+@media (max-width: 768px) {
+    .Counter {
+
+        padding: 3px 10px;
+        
+
+        &__input {
+            font-size: 14px;
+        }
+
+        &__btn {
+            font-size: 14px;
+        }
+    }
+}

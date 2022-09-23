@@ -31,10 +31,10 @@ const Footer = () => {
                         <div className="Footer__main_part">
                             <h3 className="Footer__main_head">Навигация</h3>
                             <ul className="Footer__main_list">
-                                <li className="Footer__main_list_item"><a href="#">Главная</a></li>
-                                <li className="Footer__main_list_item"><a href="#">Каталог</a></li>
-                                <li className="Footer__main_list_item"><a href="#">Вопрос-ответ</a></li>
-                                <li className="Footer__main_list_item"><a href="#">О нас</a></li>
+                                <li className="Footer__main_list_item"><Link to={'/'}>Главная</Link></li>
+                                <li className="Footer__main_list_item"><Link to={'/catalog'}>Каталог</Link></li>
+                                <li className="Footer__main_list_item"><Link to={'/faq'}>Вопрос-ответ</Link></li>
+                                <li className="Footer__main_list_item"><Link to={'/about'}>О нас</Link></li>
                             </ul>
                         </div>
                         <div className="Footer__main_part">
@@ -60,7 +60,7 @@ const Footer = () => {
                         <div className="Footer__main_part">
                             <h3 className="Footer__main_head">Информация</h3>
                             <ul className="Footer__main_list">
-                                <li className="Footer__main_list_item"><a href="#">Доставка и оплата</a></li>
+                                <li className="Footer__main_list_item"><Link to={'/delivery'}>Доставка и оплата</Link></li>
                                 <li className="Footer__main_list_item"><a href="#">Гарантии</a></li>
                                 <li className="Footer__main_list_item"><a href="#">Возврат товара</a></li>
                             </ul>
