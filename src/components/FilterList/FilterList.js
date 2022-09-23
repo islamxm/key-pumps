@@ -75,9 +75,10 @@ const FilterList = ({list, chips, removeFilter, loading, setSorting, showMore, t
                                     <Product 
                                         price={item.price}
                                         title={item.title}
-                                        productImages={item.images}
+                                        productImages={item.productImages}
                                         discount={item.discountPrice}
-                                        top={item.topSales}/>
+                                        top={item.topSales}
+                                        />
                                 </div>
                             ))
                         ) : <EmptyList text={'Ничего не найдено'}/>
