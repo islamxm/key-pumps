@@ -1,4 +1,4 @@
-export const BASE_DOMAIN = 'http://keypumps.ru';
+export const BASE_DOMAIN = 'http://keypumps.ru:3000';
 
 export const endpoints = {
     allProducts: `${BASE_DOMAIN}/getPosts?postType=Product`,

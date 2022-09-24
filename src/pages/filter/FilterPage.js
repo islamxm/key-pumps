@@ -48,24 +48,19 @@ const FilterPage = () => {
         }
     }, [categoryTitle])
 
-    useEffect(() => {
-        console.log(selectedFilters)
-    }, [selectedFilters])
+
 
 
 
     useEffect(() => {
         setOffset(0)
-    }, [sorting])
+    }, [sorting, categoryTitle])
+
 
     // фильтровать
     useEffect(() => {
-        
-        
 
-        if(selectedFilters.length > 0 || (startPrice >= 0 && endPrice >= 0)) {
-            
-
+        if(categoryTitle && sorting) {
             if(offset == 0) {
                 document.body.classList.add('touch-disabled')
                 setLoading(true)  
@@ -128,9 +123,6 @@ const FilterPage = () => {
                     setBtnDis(false)
                 })
             }
-            
-        } else {
-            
         }
         
     }, [selectedFilters, startPrice, endPrice, sorting, categoryTitle, count, offset])
@@ -163,7 +155,9 @@ const FilterPage = () => {
             {/* <Breadcrumbs/> */}
             <div className="container">
                 <div className="FilterPage__in">
-                    <div className="FilterPage__head section-title">{categoryTitle} <span>({catProds?.length > 0 ? catProds.length : 0})</span></div>
+                    <div className="FilterPage__head section-title">{categoryTitle}
+                     {/* <span>({catProds?.length > 0 ? catProds.length : 0})</span> */}
+                     </div>
                     <div className="FilterPage__body">
                         
                         <Filter 
