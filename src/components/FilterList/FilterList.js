@@ -11,21 +11,9 @@ const {Option} = Select;
 
 const FilterList = ({list, chips, removeFilter, loading, setSorting, showMore, totalLength, setOffset, btnDis, fns}) => {
 
-    // const [showList, setShowList] = useState([]);
-    // const [count, setCount] = useState(12);
-
-    
-
-    // useEffect(() => {
-    //     console.log(count)
-    // }, [count])
-    
-    // useEffect(() => {
-    //     if(list?.length > 0) {
-    //         setShowList(list.slice(0, count))
-    //     }
-
-    // }, [list, count])
+    useEffect(() => {
+        console.log(list)
+    }, [list])
 
  
 
@@ -73,11 +61,11 @@ const FilterList = ({list, chips, removeFilter, loading, setSorting, showMore, t
                             list.map((item, index) => (
                                 <div className="FilterList__body_item" key={index}>
                                     <Product 
-                                        price={item.price}
-                                        title={item.title}
-                                        productImages={item.productImages}
-                                        discount={item.discountPrice}
-                                        top={item.topSales}
+                                        price={item.product.price}
+                                        title={item.product.title}
+                                        productImages={item.images}
+                                        discount={item.product.discountPrice}
+                                        top={item.product.topSales}
                                         />
                                 </div>
                             ))
