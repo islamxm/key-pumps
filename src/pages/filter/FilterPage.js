@@ -27,7 +27,7 @@ const FilterPage = () => {
 
     const [startPrice, setStartPrice] = useState(0);
     const [endPrice, setEndPrice] = useState(2000000);
-    const [count, setCount] = useState(9);
+    const [count, setCount] = useState(18);
     const [offset, setOffset] = useState(0);
 
     const [sorting, setSorting] = useState(1)
@@ -77,7 +77,7 @@ const FilterPage = () => {
                     count,
                     offset,
                     sorting).then(res => {
-                        console.log(res)
+                      
                     setTotalLength(res.length);
                     setCatProds(res)
 
@@ -96,6 +96,7 @@ const FilterPage = () => {
                 })
             }
             if(offset > 0) {
+               
                 setBtnDis(true)
                 ds.getProductFilter(
                     categoryTitle, 
@@ -105,8 +106,7 @@ const FilterPage = () => {
                     count,
                     offset,
                     sorting).then(res => {
-                        console.log(res)
-    
+                        
                     setTotalLength(res.length);
                     setCatProds(state => {
                         return [

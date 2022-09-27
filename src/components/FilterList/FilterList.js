@@ -19,7 +19,7 @@ const FilterList = ({list, chips, removeFilter, loading, setSorting, showMore, t
 
 
     const handleMore = () => {
-        setOffset(state => state + 9);
+        setOffset(state => state + 18);
     }
 
     const onRemoveFilter = (item) => {
