@@ -29,10 +29,8 @@ const App = () => {
     const app = useRef()
 
     useEffect(() => {
-        if(app.current) {
-            console.log(app.current.scrollTop)
+        if(app.current) {          
             app.current.scrollTop = 0
-            console.log('asdas')
         }
     }, [app, location])
 

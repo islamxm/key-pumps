@@ -27,7 +27,7 @@ const FilterPage = () => {
 
     const [startPrice, setStartPrice] = useState(0);
     const [endPrice, setEndPrice] = useState(2000000);
-    const [count, setCount] = useState(12);
+    const [count, setCount] = useState(9);
     const [offset, setOffset] = useState(0);
 
     const [sorting, setSorting] = useState(1)
@@ -52,18 +52,21 @@ const FilterPage = () => {
 
 
 
-    useEffect(() => {
-        setOffset(0)
-    }, [sorting, categoryTitle])
+    // useEffect(() => {
+    //     setOffset(0)
+    // }, [sorting, categoryTitle])
+
 
 
     // фильтровать
     useEffect(() => {
+        document.body.classList.add('touch-disabled')
+        setLoading(true)  
+
 
         if(categoryTitle && sorting) {
             if(offset == 0) {
-                document.body.classList.add('touch-disabled')
-                setLoading(true)  
+                
                 ds.getProductFilter(
                     categoryTitle, 
                     selectedFilters, 
@@ -72,11 +75,9 @@ const FilterPage = () => {
                     count,
                     offset,
                     sorting).then(res => {
-                        console.log(res);
+                        console.log(res)
                     setTotalLength(res.length);
                     setCatProds(res)
-
-                    
 
                     
                     
@@ -121,6 +122,8 @@ const FilterPage = () => {
                     
                 }).finally(_ => {
                     setBtnDis(false)
+                    setLoading(false)
+                    document.body.classList.remove('touch-disabled')
                 })
             }
         }
@@ -164,7 +167,8 @@ const FilterPage = () => {
                             selected={selectedFilters} 
                             selectFilters={setSelectedFilters} 
                             filters={filtersList}
-                            priceFilter={priceFilter}/>
+                            priceFilter={priceFilter}
+                            setOffset={setOffset}/>
 
                         
                         <FilterList

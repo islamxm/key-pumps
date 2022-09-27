@@ -94,9 +94,9 @@ const OrderPage = () => {
                             
                             ds.order(values).then(res => {
                                 console.log(res)
-                                // if(!res) {
-                                //     message.error('Не удалось подтвердить заказ, повторите позже')
-                                // }
+                                if(!res) {
+                                    message.error('Не удалось подтвердить заказ, повторите позже')
+                                }
                             }).catch(_ => {
                                 
                                 message.error('Не удалось подтвердить заказ, повторите позже')
@@ -350,7 +350,7 @@ const OrderPage = () => {
                                             </div>
                                             <div className="OrderTotal__promo">
                                                 <div className="OrderTotal__promo_name">Промокод</div>
-                                                <button className="OrderTotal__promo_btn">Добавить</button>
+                                                <button type='button' className="OrderTotal__promo_btn">Добавить</button>
                                             </div>
                                             <div className="OrderTotal__ex">
                                                 Оформляя заказ, я принимаю условия <a href="#">пользовательського соглашения</a>

@@ -11,14 +11,7 @@ const {Option} = Select;
 
 const FilterList = ({list, chips, removeFilter, loading, setSorting, showMore, totalLength, setOffset, btnDis, fns}) => {
 
-    useEffect(() => {
-        console.log(list)
-    }, [list])
-
- 
-
-
-
+   
 
     const sortHandle = (value) => {
         setSorting(value);
@@ -26,7 +19,7 @@ const FilterList = ({list, chips, removeFilter, loading, setSorting, showMore, t
 
 
     const handleMore = () => {
-        setOffset(state => state + 12);
+        setOffset(state => state + 9);
     }
     
 
@@ -89,6 +82,7 @@ const FilterList = ({list, chips, removeFilter, loading, setSorting, showMore, t
                             onClick={handleMore}/>
                     </div>  
                 )
+            
             }
             
             

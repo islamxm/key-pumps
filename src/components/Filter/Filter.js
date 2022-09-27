@@ -6,7 +6,7 @@ import { NumericFormat } from 'react-number-format';
 import { Checkbox } from 'antd';
 const { Panel } = Collapse;
 
-const Filter = ({filters, selectFilters, selected, priceFilter}) => {
+const Filter = ({filters, selectFilters, selected, priceFilter, setOffset}) => {
     const [priceStart, setPriceStart] = useState(0);
     const [priceEnd, setPriceEnd] = useState(2000000);
 
@@ -15,6 +15,7 @@ const Filter = ({filters, selectFilters, selected, priceFilter}) => {
     const handlePriceChangeSlider = (v) => {
         setPriceStart(v[0]);
         setPriceEnd(v[1])
+        
     }
 
     const handleStartPriceChange = (v) => {
@@ -26,7 +27,7 @@ const Filter = ({filters, selectFilters, selected, priceFilter}) => {
     }
 
     const afterChange = (v) => {
-        
+        setOffset(0)
         priceFilter(v[0], v[1])
     }
 
@@ -35,6 +36,7 @@ const Filter = ({filters, selectFilters, selected, priceFilter}) => {
     // фильтарция
 
     const filterHandle = (e) => {
+        setOffset(0)
         if(e.target.checked) {
             selectFilters(filters => {
                 return [
@@ -51,6 +53,7 @@ const Filter = ({filters, selectFilters, selected, priceFilter}) => {
 
     const resetFilter = () => {
         selectFilters([])
+        setOffset(0)
     }
 
     
