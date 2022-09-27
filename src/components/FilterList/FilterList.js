@@ -14,6 +14,7 @@ const FilterList = ({list, chips, removeFilter, loading, setSorting, showMore, t
    
 
     const sortHandle = (value) => {
+        setOffset(0);
         setSorting(value);
     }
 
