@@ -21,6 +21,11 @@ const FilterList = ({list, chips, removeFilter, loading, setSorting, showMore, t
     const handleMore = () => {
         setOffset(state => state + 9);
     }
+
+    const onRemoveFilter = (item) => {
+        setOffset(0);
+        removeFilter(item)
+    }
     
 
     return (
@@ -30,7 +35,7 @@ const FilterList = ({list, chips, removeFilter, loading, setSorting, showMore, t
                     {
                         chips?.length > 0 ? (
                             chips.map((item, index) => (
-                                <Tag className='FilterList__top_list_item' closable onClose={() => removeFilter(item)} color='gold' key={index}>{item}</Tag>
+                                <Tag className='FilterList__top_list_item' closable onClose={() => onRemoveFilter(item)} color='gold' key={index}>{item}</Tag>
                             ))
                         ) : null
                     }

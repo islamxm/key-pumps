@@ -56,6 +56,8 @@ const FilterPage = () => {
     //     setOffset(0)
     // }, [sorting, categoryTitle])
 
+  
+
 
 
     // фильтровать
