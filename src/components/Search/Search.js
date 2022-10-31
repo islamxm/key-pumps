@@ -24,7 +24,7 @@ const Result = ({result, loading, notresult}) => {
                 {
                     result?.length > 0 ? (
                         result.map((item, index) => (
-                            <Link to={`/pr/${item.category}/${item.title}`} className="Result__item" key={index}>
+                            <Link to={`/catalog/${item.category}/${item.title}`} className="Result__item" key={index}>
                                 {
                                     item.productImages?.photosLinks?.length > 0 ? (
                                         <div className="Result__item_img">
@@ -131,29 +131,7 @@ const Search = () => {
         }
     }
 
-    // const submitSearch = () => {
-    //     if(searchVal?.length > 0) {
-    //         setResultVis(true)
-    //     } else {
-    //         setResultList(false)
-    //     }
-
-    //     setLoading(true)
-    //     ds.search(searchVal, 7).then(res => {
-            
-    //         if(res?.length > 0 && res[0] != null) {
-    //             setError(false);
-    //             setResultList(res)
-    //             console.log(res)
-    //         } else {
-    //             setResultList([])
-    //             setError(true)
-    //         }
-
-    //     }).finally(_ => {
-    //         setLoading(false)
-    //     })
-    // }
+   
 
     useEffect(() => {
         window.addEventListener('click', closeResult)

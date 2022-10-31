@@ -22,7 +22,7 @@ const ArticleCard = ({link, date, title, descr, image}) => {
             </div>
             <div className="ArticleCard__body">
                 <Link to={link} className="ArticleCard__body_name">{title}</Link>
-                <div className="ArticleCard__body_descr">{descr}</div>
+                <div className="ArticleCard__body_descr">{descr.length > 300 ? descr.slice(0, 300) + '...' : descr}</div>
                 <div className="ArticleCard__body_action">
                     <div className="ArticleCard__body_action_info">
                         {/* <span className="ArticleCard__body_action_info_part">СОЛНЕЧНЫЕ КОЛЛЕКТОРЫ</span> */}
